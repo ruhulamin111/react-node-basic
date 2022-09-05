@@ -12,7 +12,20 @@ function App() {
 
   const handleForm = (event) => {
     event.preventDefault()
-    console.log('click');
+    const name = event.target.name.value;
+    const job = event.target.job.value;
+    const user = { name, job }
+
+    fetch('http://localhost:5000/user', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => setUsers(data))
+
   }
 
 
@@ -21,7 +34,7 @@ function App() {
       <form onSubmit={handleForm}>
         <input type="text" name='name' placeholder='name' />
         <br />
-        <input type="email" name="email" placeholder='email' />
+        <input type="text" name="job" placeholder='job' />
         <br />
         <input type="submit" value="Add User" />
 
