@@ -24,8 +24,7 @@ function App() {
       body: JSON.stringify(user)
     })
       .then(res => res.json())
-      .then(data => setUsers(data))
-
+      .then(data => setUsers([...users, data]))
   }
 
 
