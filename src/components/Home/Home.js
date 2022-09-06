@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [users, setUsers] = useState([])
@@ -31,7 +32,14 @@ const Home = () => {
     const deleteOne = (id) => {
         const proceed = window.confirm('are you sure delete this item?')
         if (proceed) {
-            console.log(id);
+            const url = `http://localhost:5000/user/${id}`
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
         }
     }
 
@@ -47,7 +55,11 @@ const Home = () => {
             </form>
             <ul>
                 {
-                    users.map((user, index) => <li key={index}>{user.name} <button onClick={() => deleteOne(user._id)}>Delete</button></li>)
+                    users.map((user, index) => <div key={index}>
+                        <p>{user.name}</p>
+                        <Link to={`/user/${user._id}`}><button>Details</button></Link>
+                        <button onClick={() => deleteOne(user._id)}>Delete</button>
+                    </div>)
                 }
             </ul>
 
