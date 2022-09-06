@@ -28,6 +28,12 @@ const Home = () => {
                 event.target.reset()
             })
     }
+    const deleteOne = (id) => {
+        const proceed = window.confirm('are you sure delete this item?')
+        if (proceed) {
+            console.log(id);
+        }
+    }
 
     return (
         <div className='test'>
@@ -41,7 +47,7 @@ const Home = () => {
             </form>
             <ul>
                 {
-                    users.map((user, index) => <li key={index}>{user.name}</li>)
+                    users.map((user, index) => <li key={index}>{user.name} <button onClick={() => deleteOne(user._id)}>Delete</button></li>)
                 }
             </ul>
 
