@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 const Home = () => {
     const [users, setUsers] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => setUsers(data))
-    }, [users])
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/user')
+    //         .then(res => res.json())
+    //         .then(data => setUsers(data))
+    // }, [users])
 
     const handleForm = (event) => {
         event.preventDefault()
@@ -22,7 +22,7 @@ const Home = () => {
             body: JSON.stringify(user)
         })
             .then(res => res.json())
-            .then(data => setUsers([...users, data]))
+            .then(data => console.log(data))
     }
 
     return (
